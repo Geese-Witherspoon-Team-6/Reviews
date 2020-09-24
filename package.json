@@ -1,0 +1,40 @@
+{
+  "name": "reviews",
+  "version": "1.0.0",
+  "description": "The reviews module for qtsy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/app.js",
+    "build": "webpack --config webpack.config.js --watch"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "jquery": "3.5.1",
+    "moment": "2.29.0",
+    "mongoose": "5.10.6",
+    "nodemon": "2.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "path": "0.12.7",
+    "faker": "5.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-react": "7.10.4",
+    "@babel/core": "7.11.6",
+    "babel-loader": "8.1.0",
+    "webpack": "4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geese-Witherspoon-Team-6/Reviews.git"
+  },
+  "author": "Emma Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geese-Witherspoon-Team-6/Reviews/issues"
+  },
+  "homepage": "https://github.com/Geese-Witherspoon-Team-6/Reviews#readme"
+}
