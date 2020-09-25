@@ -23,7 +23,7 @@ const getPhoto = function(itemId, storeId) {
     Review.find({ storeId, imageUrl: { $ne: null } }).sort({ createdAt: -1 }),
   ])
     .then((results) => {
-      return results.flat();
+      return results[0].concat(results[1]);
     });
 }
 
