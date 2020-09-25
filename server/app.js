@@ -18,6 +18,19 @@ app.get('/api/item-reviews/:itemId', (req, res) => {
     })
 })
 
+app.get('/api/store-reviews/:itemId', (req, res) => {
+  reviews.getStoreId(req.params.itemId)
+    .then((storeId) => {
+      return reviews.getStore(storeId);
+    })
+    .then((reviews) => {
+      res.status(200).send(reviews);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+})
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 })
