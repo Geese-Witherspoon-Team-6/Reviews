@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import ReviewList from './components/ReviewList.jsx';
 import ReviewTabs from './components/ReviewTabs.jsx';
+import PhotoCarousel from './components/PhotoCarousel.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class App extends React.Component {
           shopCount={this.state.shopReviews.length}
           changeTabView={this.changeTabView}/>
         <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
+        <PhotoCarousel />
       </div>
     )
   }
