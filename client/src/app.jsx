@@ -15,11 +15,13 @@ class App extends React.Component {
       id: itemId,
       itemReviews: [],
       shopReviews: [],
+      photoReviews: [],
       view: 'item'
     };
 
     this.getItemReviews = this.getItemReviews.bind(this)
     this.getShopReviews = this.getShopReviews.bind(this)
+    this.getPhotoReviews = this.getPhotoReviews.bind(this)
     this.changeTabView = this.changeTabView.bind(this)
   }
 
@@ -43,6 +45,16 @@ class App extends React.Component {
       })
   }
 
+  getPhotoReviews() {
+    $.get(`/api/photo-reviews/${this.state.id}`)
+      .done((reviews) => {
+        this.setState({ photoReviews: reviews })
+      })
+      .fail(() => {
+        console.log('Request failed')
+      })
+  }
+
   changeTabView(e) {
     var view = e.target.id === 'item-button' ? 'item' : 'shop';
     this.setState({ view });
@@ -51,6 +63,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getItemReviews()
     this.getShopReviews()
+    this.getPhotoReviews()
   }
 
   render() {
@@ -61,7 +74,7 @@ class App extends React.Component {
           shopCount={this.state.shopReviews.length}
           changeTabView={this.changeTabView}/>
         <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
-        <PhotoCarousel />
+        <PhotoCarousel photos={this.state.photoReviews} />
       </div>
     )
   }

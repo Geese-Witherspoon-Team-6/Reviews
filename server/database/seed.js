@@ -10,6 +10,12 @@ for (var i = 1; i <= 100; i++) {
     var itemName = `${faker.commerce.productName()} - ${faker.commerce.productAdjective()}, ${faker.commerce.department()}`;
     // all product thumbnails will be the same, regardless of different itemIds; fix for SDC
     var itemThumb = faker.image.imageUrl();
+    var imageUrl = null;
+
+    var hasPhoto = Boolean(Math.round(Math.random()));
+    if (hasPhoto) {
+      imageUrl = faker.image.imageUrl();
+    }
 
     var newReview = {
       userId: faker.internet.userName(),
@@ -22,7 +28,7 @@ for (var i = 1; i <= 100; i++) {
       itemName: itemName,
       itemThumb: itemThumb,
       storeId: 1,
-      imageUrl: 'https://picsum.photos/400'
+      imageUrl: imageUrl
     }
 
     mockData.push(newReview);

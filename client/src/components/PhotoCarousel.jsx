@@ -3,7 +3,7 @@ import PhotoSlide from './PhotoSlide.jsx';
 
 const PhotoCarousel = ({ photos }) => (
   <div>Photos from Reviews
-    {/* {photos.map((photo, idx) => <PhotoSlide url={photo.imageUrl} key={idx} />)} */}
+    {photos.map((photo, idx) => <PhotoSlide url={photo.imageUrl} key={idx} />)}
   </div>
 )
 
