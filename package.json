@@ -4,8 +4,8 @@
   "description": "The reviews module for qtsy",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "nodemon server/app.js",
+    "test": "jest --forceExit --detectOpenHandles",
+    "start": "nodemon server/start.js",
     "build": "webpack --config webpack.config.js -d --watch",
     "db:setup": "node server/database/seed.js"
   },
@@ -26,6 +26,7 @@
     "@babel/preset-react": "7.10.4",
     "babel-loader": "8.1.0",
     "jest": "^26.4.2",
+    "supertest": "^5.0.0",
     "webpack": "4.44.2",
     "webpack-cli": "^3.3.12"
   },

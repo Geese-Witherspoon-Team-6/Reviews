@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const reviews = require('./database/helpers.js')
 const app = express()
-const port = 3001
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -37,7 +36,6 @@ app.get('/api/photo-reviews/:itemId', (req, res) => {
       return reviews.getPhoto(req.params.itemId, storeId);
     })
     .then((reviews) => {
-      console.log(Array.isArray(reviews));
       res.status(200).send(reviews);
     })
     .catch((err) => {
@@ -45,6 +43,4 @@ app.get('/api/photo-reviews/:itemId', (req, res) => {
     })
 })
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-})
+module.exports = app
