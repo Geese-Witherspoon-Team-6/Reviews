@@ -12,10 +12,10 @@ const PhotoCarousel = ({ photos }) => {
   return (
     <Carousel activeIndex={index} indicators={false} interval={null} wrap={false} onSelect={handleSelect}>
       {photos.map((slide, idx) => {
-        return <CarouselItem>
+        return <CarouselItem key={idx}>
           {slide.map((photo, idx) => (
-            <div className="carousel-img d-inline">
-              <img src={photo.imageUrl} key={idx}></img>
+            <div className="carousel-img d-inline" key={idx}>
+              <img src={photo.imageUrl} key={photo._id}></img>
             </div>
           ))}
         </CarouselItem>

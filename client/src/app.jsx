@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 import ReviewList from './components/ReviewList.jsx';
 import ReviewTabs from './components/ReviewTabs.jsx';
 import PhotoCarousel from './components/PhotoCarousel.jsx';
+import PhotoCard from './components/PhotoCard.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -82,6 +84,7 @@ class App extends React.Component {
           changeTabView={this.changeTabView}/>
         <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
         <PhotoCarousel photos={this.state.photoReviews} />
+        <PhotoCard review={{ body: 'filler' }}/>
       </div>
     )
   }
