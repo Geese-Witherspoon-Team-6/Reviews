@@ -1,0 +1,8 @@
+.carousel-img {
+  margin: 1%;
+}
+
+.carousel-img img {
+  width: 23%;
+  border-radius: 5%;
+}

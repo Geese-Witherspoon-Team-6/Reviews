@@ -48,7 +48,14 @@ class App extends React.Component {
   getPhotoReviews() {
     $.get(`/api/photo-reviews/${this.state.id}`)
       .done((reviews) => {
-        this.setState({ photoReviews: reviews })
+        // formatting for photo carousel
+        var slides = [[], [], [], [], []];
+        var i = 0;
+        for (let slide of slides) {
+          slides[i] = slide.concat(reviews.slice(i * 4, (i * 4) + 4));
+          i++;
+        }
+        this.setState({ photoReviews: slides });
       })
       .fail(() => {
         console.log('Request failed')
