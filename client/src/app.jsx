@@ -18,6 +18,8 @@ class App extends React.Component {
       itemReviews: [],
       shopReviews: [],
       photoReviews: [],
+      cardReview: {},
+      cardShow: false,
       view: 'item'
     };
 
@@ -25,6 +27,8 @@ class App extends React.Component {
     this.getShopReviews = this.getShopReviews.bind(this)
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
     this.changeTabView = this.changeTabView.bind(this)
+    this.toggleCardShow = this.toggleCardShow.bind(this)
+    this.changeCardReview = this.changeCardReview.bind(this)
   }
 
   getItemReviews() {
@@ -69,6 +73,15 @@ class App extends React.Component {
     this.setState({ view });
   }
 
+  changeCardReview(e) {
+    var cardReview = this.state.photoReviews.flat().find((review) => review._id === e.target.id);
+    this.setState({ cardReview, cardShow: true });
+  }
+
+  toggleCardShow() {
+    this.setState({ cardShow: !this.state.cardShow })
+  }
+
   componentDidMount() {
     this.getItemReviews()
     this.getShopReviews()
@@ -83,8 +96,11 @@ class App extends React.Component {
           shopCount={this.state.shopReviews.length}
           changeTabView={this.changeTabView}/>
         <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
-        <PhotoCarousel photos={this.state.photoReviews} />
-        <PhotoCard review={{ body: 'filler' }}/>
+        <PhotoCarousel photos={this.state.photoReviews} popUpReview={this.changeCardReview} />
+        <PhotoCard
+          review={ this.state.cardReview }
+          show={this.state.cardShow}
+          toggleShow={this.toggleCardShow}/>
       </div>
     )
   }

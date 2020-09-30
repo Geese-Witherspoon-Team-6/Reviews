@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CarouselItem } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 
-const PhotoCarousel = ({ photos }) => {
+const PhotoCarousel = ({ photos, popUpReview }) => {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -14,8 +14,8 @@ const PhotoCarousel = ({ photos }) => {
       {photos.map((slide, idx) => {
         return <CarouselItem key={idx}>
           {slide.map((photo, idx) => (
-            <div className="carousel-img d-inline" key={idx}>
-              <img src={photo.imageUrl} key={photo._id}></img>
+            <div className="carousel-img d-inline" key={idx} onClick={popUpReview}>
+              <img src={photo.imageUrl} id={photo._id} key={idx}></img>
             </div>
           ))}
         </CarouselItem>
