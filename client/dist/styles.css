@@ -7,11 +7,6 @@
   border-radius: 5%;
 }
 
-.card-horizontal {
-  display: flex;
-  flex: 1 1 auto;
-}
-
 .exit-btn {
   float: right;
   left: 20px;

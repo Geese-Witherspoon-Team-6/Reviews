@@ -5,7 +5,7 @@ import $ from 'jquery';
 import ReviewList from './components/ReviewList.jsx';
 import ReviewTabs from './components/ReviewTabs.jsx';
 import PhotoCarousel from './components/PhotoCarousel.jsx';
-import PhotoCard from './components/PhotoCard.jsx';
+import ModalCarousel from './components/ModalCarousel.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,8 +18,8 @@ class App extends React.Component {
       itemReviews: [],
       shopReviews: [],
       photoReviews: [],
-      cardReview: {},
-      cardShow: false,
+      modalIdx: 0,
+      modalShow: false,
       view: 'item'
     };
 
@@ -27,8 +27,9 @@ class App extends React.Component {
     this.getShopReviews = this.getShopReviews.bind(this)
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
     this.changeTabView = this.changeTabView.bind(this)
-    this.toggleCardShow = this.toggleCardShow.bind(this)
-    this.changeCardReview = this.changeCardReview.bind(this)
+    this.modalHandleSelect = this.modalHandleSelect.bind(this)
+    this.toggleModalShow = this.toggleModalShow.bind(this)
+    this.popUpReview = this.popUpReview.bind(this)
   }
 
   getItemReviews() {
@@ -73,13 +74,16 @@ class App extends React.Component {
     this.setState({ view });
   }
 
-  changeCardReview(e) {
-    var cardReview = this.state.photoReviews.flat().find((review) => review._id === e.target.id);
-    this.setState({ cardReview, cardShow: true });
+  popUpReview(e) {
+    this.setState({ modalIdx: Number(e.target.id), modalShow: true });
   }
 
-  toggleCardShow() {
-    this.setState({ cardShow: !this.state.cardShow })
+  modalHandleSelect(selectedIdx, e) {
+    this.setState({ modalIdx: Number(selectedIdx) })
+  }
+
+  toggleModalShow() {
+    this.setState({ modalShow: !this.state.modalShow })
   }
 
   componentDidMount() {
@@ -96,11 +100,13 @@ class App extends React.Component {
           shopCount={this.state.shopReviews.length}
           changeTabView={this.changeTabView}/>
         <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
-        <PhotoCarousel photos={this.state.photoReviews} popUpReview={this.changeCardReview} />
-        <PhotoCard
-          review={ this.state.cardReview }
-          show={this.state.cardShow}
-          toggleShow={this.toggleCardShow}/>
+        <PhotoCarousel photos={this.state.photoReviews} popUpReview={this.popUpReview} />
+        <ModalCarousel
+          reviewIdx={this.state.modalIdx}
+          reviews={ this.state.photoReviews.flat() }
+          show={this.state.modalShow}
+          toggleShow={this.toggleModalShow}
+          handleSelect={this.modalHandleSelect} />
       </div>
     )
   }
