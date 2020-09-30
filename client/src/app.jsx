@@ -20,6 +20,7 @@ class App extends React.Component {
       photoReviews: [],
       modalIdx: 0,
       modalShow: false,
+      modalIsCarousel: true,
       view: 'item'
     };
 
@@ -27,9 +28,10 @@ class App extends React.Component {
     this.getShopReviews = this.getShopReviews.bind(this)
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
     this.changeTabView = this.changeTabView.bind(this)
+    this.handleReviewClick = this.handleReviewClick.bind(this)
     this.modalHandleSelect = this.modalHandleSelect.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
-    this.popUpReview = this.popUpReview.bind(this)
+    this.carouselClick = this.carouselClick.bind(this)
   }
 
   getItemReviews() {
@@ -74,8 +76,14 @@ class App extends React.Component {
     this.setState({ view });
   }
 
-  popUpReview(e) {
-    this.setState({ modalIdx: Number(e.target.id), modalShow: true });
+  handleReviewClick(e) {
+    var reviews = this.state.photoReviews.flat();
+    var modalIdx = reviews.indexOf(reviews.find((review) => review._id === e.target.id));
+    this.setState({ modalIdx, modalIsCarousel: false, modalShow: true })
+  }
+
+  carouselClick(e) {
+    this.setState({ modalIdx: Number(e.target.id), modalIsCarousel: true, modalShow: true });
   }
 
   modalHandleSelect(selectedIdx, e) {
@@ -99,12 +107,15 @@ class App extends React.Component {
           itemCount={this.state.itemReviews.length}
           shopCount={this.state.shopReviews.length}
           changeTabView={this.changeTabView}/>
-        <ReviewList reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}/>
-        <PhotoCarousel photos={this.state.photoReviews} popUpReview={this.popUpReview} />
+        <ReviewList
+          reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}
+          handleReviewClick={this.handleReviewClick}/>
+        <PhotoCarousel photos={this.state.photoReviews} carouselClick={this.carouselClick} />
         <ModalCarousel
           reviewIdx={this.state.modalIdx}
           reviews={ this.state.photoReviews.flat() }
           show={this.state.modalShow}
+          isCarousel={this.state.modalIsCarousel}
           toggleShow={this.toggleModalShow}
           handleSelect={this.modalHandleSelect} />
       </div>

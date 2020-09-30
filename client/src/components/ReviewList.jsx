@@ -1,9 +1,9 @@
 import React from 'react';
 import Review from './Review.jsx'
 
-const ReviewList = (props) => (
+const ReviewList = ({ reviews, handleReviewClick }) => (
   <div>
-    {props.reviews.map((review, idx) => <Review review={review} key={idx} />)}
+    {reviews.map((review, idx) => <Review review={review} handleClick={handleReviewClick} key={idx} />)}
   </div>
 )
 

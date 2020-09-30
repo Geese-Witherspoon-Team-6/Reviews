@@ -1,11 +1,15 @@
 import React from 'react';
 
-const Review = ({ review }) => (
+const Review = ({ review, handleClick }) => (
   <div>
     <div>{review.userName} {review.createdAt}</div>
     <div>{review.rating} / 5</div>
     <div>{review.body}</div>
     <div>Purchased item: {review.itemName}</div>
+    {review.imageUrl !== null &&
+      <div onClick={handleClick}>
+        <img id={review._id} src={review.imageUrl}></img>
+      </div>}
   </div>
 )
 
