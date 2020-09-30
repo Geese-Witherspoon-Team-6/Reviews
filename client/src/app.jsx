@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 import ReviewList from './components/ReviewList.jsx';
-import ReviewTabs from './components/ReviewTabs.jsx';
 import PhotoCarousel from './components/PhotoCarousel.jsx';
 import ModalCarousel from './components/ModalCarousel.jsx';
 
@@ -20,14 +19,12 @@ class App extends React.Component {
       photoReviews: [],
       modalIdx: 0,
       modalShow: false,
-      modalIsCarousel: true,
-      view: 'item'
+      modalIsCarousel: true
     };
 
     this.getItemReviews = this.getItemReviews.bind(this)
     this.getShopReviews = this.getShopReviews.bind(this)
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
-    this.changeTabView = this.changeTabView.bind(this)
     this.handleReviewClick = this.handleReviewClick.bind(this)
     this.modalHandleSelect = this.modalHandleSelect.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
@@ -71,11 +68,6 @@ class App extends React.Component {
       })
   }
 
-  changeTabView(e) {
-    var view = e.target.id === 'item-button' ? 'item' : 'shop';
-    this.setState({ view });
-  }
-
   handleReviewClick(e) {
     var reviews = this.state.photoReviews.flat();
     var modalIdx = reviews.indexOf(reviews.find((review) => review._id === e.target.id));
@@ -103,12 +95,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ReviewTabs
-          itemCount={this.state.itemReviews.length}
-          shopCount={this.state.shopReviews.length}
-          changeTabView={this.changeTabView}/>
         <ReviewList
-          reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}
+          itemReviews={this.state.itemReviews}
+          shopReviews={this.state.shopReviews}
           handleReviewClick={this.handleReviewClick}/>
         <PhotoCarousel photos={this.state.photoReviews} carouselClick={this.carouselClick} />
         <ModalCarousel
