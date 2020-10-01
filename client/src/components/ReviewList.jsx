@@ -51,10 +51,8 @@ class ReviewList extends React.Component {
       this.setState({ pageNum: this.state.pageNum - 1 })
     } else if (move === 'next') {
       this.setState({ pageNum: this.state.pageNum + 1})
-    } else if (move === 'first') {
-      this.setState({ pageNum: 1 })
-    } else if (move === 'last') {
-      this.setState({ pageNum: this.state.maxPage })
+    } else if (!move.target.innerHTML.includes('span')) {
+      this.setState({ pageNum: Number(move.target.innerHTML) })
     }
   }
 
