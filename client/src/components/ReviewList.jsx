@@ -15,11 +15,15 @@ class ReviewList extends React.Component {
       id: this.props.itemId,
       itemReviews: [],
       shopReviews: [],
-      pageNum: 0
+      currentTab: 'items',
+      pageNum: 1,
+      maxPage: 1
     };
 
     this.getItemReviews = this.getItemReviews.bind(this);
     this.getShopReviews = this.getShopReviews.bind(this);
+    this.onPaginate = this.onPaginate.bind(this);
+    this.onSwitchTabs = this.onSwitchTabs.bind(this);
   }
 
   getItemReviews() {
@@ -42,14 +46,37 @@ class ReviewList extends React.Component {
       })
   }
 
+  onPaginate(move) {
+    console.log(this.state.pageNum);
+    if (move === 'prev') {
+      this.setState({ pageNum: this.state.pageNum - 1 })
+    } else if (move === 'next') {
+      this.setState({ pageNum: this.state.pageNum + 1})
+    } else if (move === 'first') {
+      this.setState({ pageNum: 1 })
+    } else if (move === 'last') {
+      this.setState({ pageNum: this.state.maxPage })
+    }
+  }
+
+  onSwitchTabs(key) {
+    let maxPage = key === 'items' ?
+      Math.ceil(this.state.itemReviews.length / 5) :
+      Math.ceil(this.state.shopReviews.length / 5);
+    this.setState({ currentTab: key, maxPage });
+  }
+
   componentDidMount() {
     this.getItemReviews()
     this.getShopReviews()
   }
 
   render() {
+    let page = this.state.pageNum;
+    let max = this.state.maxPage;
+
     return (
-    <TabContainer defaultActiveKey="items" transition={false}>
+    <TabContainer defaultActiveKey="items" transition={false} onSelect={this.onSwitchTabs}>
       <Nav>
         <Nav.Item>
           <Nav.Link eventKey="items">Reviews for this item {this.state.itemReviews.length}</Nav.Link>
@@ -68,40 +95,29 @@ class ReviewList extends React.Component {
           Shop
         </TabPane>
       </TabContent>
-      <Pagination>
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis disabled />
+      <Pagination >
+        <Pagination.Prev
+          onClick={() => this.onPaginate('prev')}
+          disabled={page === 1} />
+        <Pagination.Item
+          onClick={() => this.onPaginate('first')}
+          active={page === 1} >{1}
+        </Pagination.Item>
 
-        <Pagination.Item active>{12}</Pagination.Item>
-
+        {page <= 2 && <Pagination.Item active={page === 2}>{2}</Pagination.Item>}
         <Pagination.Ellipsis disabled />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
+        {page > 2 && page < (max - 1) && <Pagination.Item active={page > 2 && page < (max - 1)}>{page}</Pagination.Item>}
+        {page > 2 && page < (max - 1) && <Pagination.Ellipsis disabled />}
+        {page >= (max - 1) && <Pagination.Item active={page === (max - 1)}>{max - 1}</Pagination.Item>}
+
+        <Pagination.Item
+          onClick={() => this.onPaginate('last')}
+          active={page === max} >{max}
+        </Pagination.Item>
+        <Pagination.Next onClick={() => this.onPaginate('next')} disabled={page === max}/>
       </Pagination>
     </TabContainer>
   )}
 }
-
-// const ReviewList = ({ itemReviews, shopReviews, handleReviewClick }) => (
-  // <TabContainer defaultActiveKey="items" transition={false}>
-  //   <Nav>
-  //     <Nav.Item>
-  //       <Nav.Link eventKey="items">Reviews for this item {itemReviews.length}</Nav.Link>
-  //     </Nav.Item>
-  //     <Nav.Item>
-  //       <Nav.Link eventKey="shop">Reviews for this shop {shopReviews.length}</Nav.Link>
-  //     </Nav.Item>
-  //   </Nav>
-  //   <TabContent>
-  //     <TabPane eventKey="items">
-  //       {itemReviews.map((review, idx) => <Review review={review} handleClick={handleReviewClick} key={idx} />)}
-  //     </TabPane>
-  //     <TabPane eventKey="shop">
-  //       {shopReviews.map((review, idx) => <Review review={review} handleClick={handleReviewClick} key={idx} />)}
-  //     </TabPane>
-  //   </TabContent>
-  // </TabContainer>
-// )
 
 export default ReviewList;
