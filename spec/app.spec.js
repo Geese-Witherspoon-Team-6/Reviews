@@ -61,14 +61,14 @@ describe('API endpoints', () => {
   describe('Item reviews endpoint', () => {
 
     it('should respond to a request for item reviews', async () => {
-      const res = await request.get('/api/item-reviews/1');
+      const res = await request.get('/api/item-reviews/1/new');
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
     });
 
     it('should use the getItem database helper to get reviews', async () => {
-      const res = await request.get('/api/item-reviews/1');
-      const reviews = await helper.getItem(1);
+      const res = await request.get('/api/item-reviews/1/new');
+      const reviews = await helper.getItem(1, 'new');
 
       expect(res.body.length).toBe(reviews.length);
       res.body.forEach((review, idx) => {
@@ -82,14 +82,14 @@ describe('API endpoints', () => {
   describe('Store reviews endpoint', () => {
 
     it('should respond to a request for store reviews', async () => {
-      const res = await request.get('/api/store-reviews/1');
+      const res = await request.get('/api/store-reviews/1/new');
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
     });
 
     it('should use the getItem database helper to get reviews', async () => {
-      const res = await request.get('/api/store-reviews/1');
-      const reviews = await helper.getStore(0);
+      const res = await request.get('/api/store-reviews/1/new');
+      const reviews = await helper.getStore(0, 'new');
 
       expect(res.body.length).toBe(reviews.length);
       res.body.forEach((review, idx) => {
