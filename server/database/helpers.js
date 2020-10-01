@@ -27,9 +27,17 @@ const getPhoto = function(itemId, storeId) {
     });
 }
 
+const patchHelpful = function(reviewId) {
+  return Review.findById(reviewId, 'helpful')
+    .then((review) => {
+      return Review.findByIdAndUpdate(review._id, { helpful: (review.helpful + 1) }, { new: true });
+    });
+}
+
 module.exports = {
   getItem,
   getStore,
   getPhoto,
-  getStoreId
+  getStoreId,
+  patchHelpful
 }

@@ -8,21 +8,24 @@ var testReviews = [{
   userId: 'BigBird',
   itemId: 1,
   storeId: 0,
-  createdAt: faker.date.past()
+  createdAt: faker.date.past(),
+  helpful: 0
 },
 {
   userId: 'noodleManxD',
   itemId: 1,
   storeId: 0,
   createdAt: faker.date.past(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 3
 },
 {
   userId: 'elmo',
   itemId: 2,
   storeId: 0,
   createdAt: faker.date.future(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 1
 }]
 
 beforeAll(async () => {
@@ -105,6 +108,17 @@ describe('Database helper functions', () => {
         expect(reviews[0].itemId).not.toBe(reviews[1].itemId);
       })
     });
+  });
+
+  describe('patchHelpful', () => {
+    it('should increment a review\'s helpful field', async () => {
+      var review = await Review.findOne({ userId: 'BigBird' });
+      var before = await Review.findById(review._id);
+      await helper.patchHelpful(review._id);
+      var after = await Review.findById(review._id);
+
+      expect(after.helpful).toBe(before.helpful + 1);
+    })
   });
 
 });

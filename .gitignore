@@ -1,2 +1,2 @@
 node_modules
-reviews.bundle.js
+client/dist/reviews.bundle.js
