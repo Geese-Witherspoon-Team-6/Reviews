@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 import ReviewList from './components/ReviewList.jsx';
-import ReviewTabs from './components/ReviewTabs.jsx';
 import PhotoCarousel from './components/PhotoCarousel.jsx';
 import ModalCarousel from './components/ModalCarousel.jsx';
 
@@ -15,43 +14,17 @@ class App extends React.Component {
 
     this.state = {
       id: itemId,
-      itemReviews: [],
-      shopReviews: [],
       photoReviews: [],
       modalIdx: 0,
       modalShow: false,
-      modalIsCarousel: true,
-      view: 'item'
+      modalIsCarousel: true
     };
 
-    this.getItemReviews = this.getItemReviews.bind(this)
-    this.getShopReviews = this.getShopReviews.bind(this)
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
-    this.changeTabView = this.changeTabView.bind(this)
     this.handleReviewClick = this.handleReviewClick.bind(this)
     this.modalHandleSelect = this.modalHandleSelect.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
     this.carouselClick = this.carouselClick.bind(this)
-  }
-
-  getItemReviews() {
-    $.get(`/api/item-reviews/${this.state.id}`)
-      .done((reviews) => {
-        this.setState({ itemReviews: reviews })
-      })
-      .fail(() => {
-        console.log('Request failed')
-      })
-  }
-
-  getShopReviews() {
-    $.get(`/api/store-reviews/${this.state.id}`)
-      .done((reviews) => {
-        this.setState({ shopReviews: reviews })
-      })
-      .fail(() => {
-        console.log('Request failed')
-      })
   }
 
   getPhotoReviews() {
@@ -69,11 +42,6 @@ class App extends React.Component {
       .fail(() => {
         console.log('Request failed')
       })
-  }
-
-  changeTabView(e) {
-    var view = e.target.id === 'item-button' ? 'item' : 'shop';
-    this.setState({ view });
   }
 
   handleReviewClick(e) {
@@ -95,22 +63,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getItemReviews()
-    this.getShopReviews()
     this.getPhotoReviews()
   }
 
   render() {
     return (
       <div>
-        <ReviewTabs
-          itemCount={this.state.itemReviews.length}
-          shopCount={this.state.shopReviews.length}
-          changeTabView={this.changeTabView}/>
         <ReviewList
-          reviews={this.state.view === 'item' ? this.state.itemReviews : this.state.shopReviews}
+          itemId={this.state.id}
           handleReviewClick={this.handleReviewClick}/>
-        <PhotoCarousel photos={this.state.photoReviews} carouselClick={this.carouselClick} />
+        <PhotoCarousel
+          photos={this.state.photoReviews}
+          carouselClick={this.carouselClick} />
         <ModalCarousel
           reviewIdx={this.state.modalIdx}
           reviews={ this.state.photoReviews.flat() }

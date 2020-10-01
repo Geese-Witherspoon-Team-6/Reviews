@@ -7,8 +7,8 @@ const Review = ({ review, handleClick }) => (
     <div>{review.body}</div>
     <div>Purchased item: {review.itemName}</div>
     {review.imageUrl !== null &&
-      <div onClick={handleClick}>
-        <img id={review._id} src={review.imageUrl}></img>
+      <div>
+        <img onClick={handleClick} id={review._id} src={review.imageUrl}></img>
       </div>}
   </div>
 )
