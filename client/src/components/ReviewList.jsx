@@ -60,7 +60,7 @@ class ReviewList extends React.Component {
     let maxPage = key === 'items' ?
       Math.ceil(this.state.itemReviews.length / 5) :
       Math.ceil(this.state.shopReviews.length / 5);
-    this.setState({ currentTab: key, maxPage });
+    this.setState({ currentTab: key, pageNum: 1, maxPage });
   }
 
   componentDidMount() {
@@ -69,6 +69,8 @@ class ReviewList extends React.Component {
   }
 
   render() {
+    let start = (this.state.pageNum - 1) * 5;
+    let end = start + 5;
     return (
     <TabContainer defaultActiveKey="items" transition={false} onSelect={this.onSwitchTabs}>
       <Nav>
@@ -81,12 +83,18 @@ class ReviewList extends React.Component {
       </Nav>
       <TabContent>
         <TabPane eventKey="items">
-          {/* {itemReviews.map((review, idx) => <Review review={review} handleClick={this.props.handleReviewClick} key={idx} />)} */}
-          Items
+          {this.state.itemReviews.slice(start, end).map((review, idx) =>
+          <Review
+            review={review}
+            handleClick={this.props.handleReviewClick}
+            key={idx} />)}
         </TabPane>
         <TabPane eventKey="shop">
-          {/* {shopReviews.map((review, idx) => <Review review={review} handleClick={this.props.handleReviewClick} key={idx} />)} */}
-          Shop
+          {this.state.shopReviews.slice(start, end).map((review, idx) =>
+            <Review
+              review={review}
+              handleClick={this.props.handleReviewClick}
+              key={idx} />)}
         </TabPane>
       </TabContent>
       <ReviewPagination
