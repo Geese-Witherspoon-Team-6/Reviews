@@ -24,6 +24,7 @@ class ReviewList extends React.Component {
     this.getShopReviews = this.getShopReviews.bind(this);
     this.onPaginate = this.onPaginate.bind(this);
     this.onSwitchTabs = this.onSwitchTabs.bind(this);
+    this.clickHelpful = this.clickHelpful.bind(this);
   }
 
   getItemReviews() {
@@ -63,6 +64,21 @@ class ReviewList extends React.Component {
     this.setState({ currentTab: key, pageNum: 1, maxPage });
   }
 
+  clickHelpful(e) {
+    e.target.style.display = 'none';
+    document.getElementById(`${e.target.id}-thanks`).style.display = 'inline';
+    $.ajax({
+      url: `/api/helpful-review/${e.target.id}`,
+      method: 'PATCH'
+    })
+    .done((changed) => {
+      console.log(`Review helpful count updated to ${changed.helpful}`)
+    })
+    .fail((err) => {
+      console.log('Request failed')
+    })
+  }
+
   componentDidMount() {
     this.getItemReviews()
     this.getShopReviews()
@@ -86,14 +102,16 @@ class ReviewList extends React.Component {
           {this.state.itemReviews.slice(start, end).map((review, idx) =>
           <Review
             review={review}
-            handleClick={this.props.handleReviewClick}
+            clickReviewPhoto={this.props.clickReviewPhoto}
+            clickHelpful={this.clickHelpful}
             key={idx} />)}
         </TabPane>
         <TabPane eventKey="shop">
           {this.state.shopReviews.slice(start, end).map((review, idx) =>
             <Review
               review={review}
-              handleClick={this.props.handleReviewClick}
+              clickReviewPhoto={this.props.clickReviewPhoto}
+              clickHelpful={this.clickHelpful}
               key={idx} />)}
         </TabPane>
       </TabContent>
