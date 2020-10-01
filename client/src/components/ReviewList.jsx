@@ -4,8 +4,8 @@ import Nav from 'react-bootstrap/Nav'
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
-import Pagination from 'react-bootstrap/Pagination';
 import Review from './Review.jsx';
+import ReviewPagination from './ReviewPagination.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -47,7 +47,6 @@ class ReviewList extends React.Component {
   }
 
   onPaginate(move) {
-    console.log(this.state.pageNum);
     if (move === 'prev') {
       this.setState({ pageNum: this.state.pageNum - 1 })
     } else if (move === 'next') {
@@ -72,9 +71,6 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let page = this.state.pageNum;
-    let max = this.state.maxPage;
-
     return (
     <TabContainer defaultActiveKey="items" transition={false} onSelect={this.onSwitchTabs}>
       <Nav>
@@ -95,27 +91,11 @@ class ReviewList extends React.Component {
           Shop
         </TabPane>
       </TabContent>
-      <Pagination >
-        <Pagination.Prev
-          onClick={() => this.onPaginate('prev')}
-          disabled={page === 1} />
-        <Pagination.Item
-          onClick={() => this.onPaginate('first')}
-          active={page === 1} >{1}
-        </Pagination.Item>
-
-        {page <= 2 && <Pagination.Item active={page === 2}>{2}</Pagination.Item>}
-        <Pagination.Ellipsis disabled />
-        {page > 2 && page < (max - 1) && <Pagination.Item active={page > 2 && page < (max - 1)}>{page}</Pagination.Item>}
-        {page > 2 && page < (max - 1) && <Pagination.Ellipsis disabled />}
-        {page >= (max - 1) && <Pagination.Item active={page === (max - 1)}>{max - 1}</Pagination.Item>}
-
-        <Pagination.Item
-          onClick={() => this.onPaginate('last')}
-          active={page === max} >{max}
-        </Pagination.Item>
-        <Pagination.Next onClick={() => this.onPaginate('next')} disabled={page === max}/>
-      </Pagination>
+      <ReviewPagination
+        page={this.state.pageNum}
+        max={this.state.maxPage}
+        onPaginate={this.onPaginate}
+      />
     </TabContainer>
   )}
 }
