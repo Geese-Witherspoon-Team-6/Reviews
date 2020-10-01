@@ -28,7 +28,8 @@ for (var i = 1; i <= 100; i++) {
       itemName: itemName,
       itemThumb: itemThumb,
       storeId: 1,
-      imageUrl: imageUrl
+      imageUrl: imageUrl,
+      helpful: 0
     }
 
     mockData.push(newReview);

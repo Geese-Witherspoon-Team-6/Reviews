@@ -13,7 +13,8 @@ const reviewSchema = new mongoose.Schema({
   itemName: String,
   itemThumb: String,
   storeId: Number,
-  imageUrl: String
+  imageUrl: String,
+  helpful: Number
 },
 {
   timestamps: true
