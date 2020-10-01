@@ -21,6 +21,7 @@ class ReviewList extends React.Component {
       currentTab: 'items',
       pageNum: 1,
       maxPage: 1,
+      sort: 'rec'
     };
 
     this.getItemReviews = this.getItemReviews.bind(this);
@@ -31,8 +32,8 @@ class ReviewList extends React.Component {
     this.sortBy = this.sortBy.bind(this);
   }
 
-  getItemReviews() {
-    $.get(`/api/item-reviews/${this.state.id}`)
+  getItemReviews(sort) {
+    $.get(`/api/item-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ itemReviews: reviews })
       })
@@ -41,8 +42,8 @@ class ReviewList extends React.Component {
       })
   }
 
-  getShopReviews() {
-    $.get(`/api/store-reviews/${this.state.id}`)
+  getShopReviews(sort) {
+    $.get(`/api/store-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ shopReviews: reviews })
       })
@@ -68,6 +69,13 @@ class ReviewList extends React.Component {
     this.setState({ currentTab: key, pageNum: 1, maxPage });
   }
 
+  sortBy(sort, e) {
+    this.getItemReviews(sort);
+    this.getShopReviews(sort);
+    this.onSwitchTabs(this.state.currentTab);
+    this.setState({ sort })
+  }
+
   clickHelpful(e) {
     e.target.style.display = 'none';
     document.getElementById(`${e.target.id}-thanks`).style.display = 'inline';
@@ -83,13 +91,9 @@ class ReviewList extends React.Component {
     })
   }
 
-  sortBy(key, e) {
-    this.setState({ currentTab: this.state.currentTab });
-  }
-
   componentDidMount() {
-    this.getItemReviews()
-    this.getShopReviews()
+    this.getItemReviews('rec')
+    this.getShopReviews('rec')
   }
 
   render() {
@@ -109,7 +113,7 @@ class ReviewList extends React.Component {
 
       <Dropdown onSelect={this.sortBy}>
         <Dropdown.Toggle id="dropdown-sort-by">
-          Sort by:
+          Sort by: {this.state.sort === 'rec' ? 'Recommended' : 'Newest'}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item eventKey="rec">Recommended</Dropdown.Item>
