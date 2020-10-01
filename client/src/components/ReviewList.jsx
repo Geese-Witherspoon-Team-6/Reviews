@@ -1,9 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
+
 import Nav from 'react-bootstrap/Nav'
+import Dropdown from 'react-bootstrap/Dropdown'
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
 import TabPane from 'react-bootstrap/TabPane';
+
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
 
@@ -17,7 +20,7 @@ class ReviewList extends React.Component {
       shopReviews: [],
       currentTab: 'items',
       pageNum: 1,
-      maxPage: 1
+      maxPage: 1,
     };
 
     this.getItemReviews = this.getItemReviews.bind(this);
@@ -25,6 +28,7 @@ class ReviewList extends React.Component {
     this.onPaginate = this.onPaginate.bind(this);
     this.onSwitchTabs = this.onSwitchTabs.bind(this);
     this.clickHelpful = this.clickHelpful.bind(this);
+    this.sortBy = this.sortBy.bind(this);
   }
 
   getItemReviews() {
@@ -79,6 +83,10 @@ class ReviewList extends React.Component {
     })
   }
 
+  sortBy(key, e) {
+    this.setState({ currentTab: this.state.currentTab });
+  }
+
   componentDidMount() {
     this.getItemReviews()
     this.getShopReviews()
@@ -88,7 +96,8 @@ class ReviewList extends React.Component {
     let start = (this.state.pageNum - 1) * 5;
     let end = start + 5;
     return (
-    <TabContainer defaultActiveKey="items" transition={false} onSelect={this.onSwitchTabs}>
+    <TabContainer activeKey={this.state.currentTab} transition={false} onSelect={this.onSwitchTabs}>
+
       <Nav>
         <Nav.Item>
           <Nav.Link eventKey="items">Reviews for this item {this.state.itemReviews.length}</Nav.Link>
@@ -97,6 +106,17 @@ class ReviewList extends React.Component {
           <Nav.Link eventKey="shop">Reviews for this shop {this.state.shopReviews.length}</Nav.Link>
         </Nav.Item>
       </Nav>
+
+      <Dropdown onSelect={this.sortBy}>
+        <Dropdown.Toggle id="dropdown-sort-by">
+          Sort by:
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item eventKey="rec">Recommended</Dropdown.Item>
+          <Dropdown.Item eventKey="new">Newest</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
       <TabContent>
         <TabPane eventKey="items">
           {this.state.itemReviews.slice(start, end).map((review, idx) =>
@@ -115,11 +135,13 @@ class ReviewList extends React.Component {
               key={idx} />)}
         </TabPane>
       </TabContent>
+
       <ReviewPagination
         page={this.state.pageNum}
         max={this.state.maxPage}
         onPaginate={this.onPaginate}
       />
+
     </TabContainer>
   )}
 }

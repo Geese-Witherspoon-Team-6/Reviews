@@ -11,8 +11,8 @@ const Review = ({ review, clickReviewPhoto, clickHelpful }) => (
         <img onClick={clickReviewPhoto} id={review._id} src={review.imageUrl}></img>
       </div>}
     {/* Note: the following div should only be rendered if the user is logged in */}
-    <div onClick={clickHelpful}>
-      <button className="helpful-btn" id={review._id} >Is this helpful?</button>
+    <div>
+      <button onClick={clickHelpful} className="helpful-btn" id={review._id} >Is this helpful?</button>
       <div id={`${review._id}-thanks`} style={{display: 'none'}}>Thanks for your feedback!</div>
     </div>
   </div>
