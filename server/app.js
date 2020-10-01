@@ -43,4 +43,14 @@ app.get('/api/photo-reviews/:itemId', (req, res) => {
     })
 })
 
+app.patch('/api/helpful-review/:reviewId', (req, res) => {
+  reviews.patchHelpful(req.params.reviewId)
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
+})
+
 module.exports = app
