@@ -51,3 +51,28 @@
 .space {
   margin-bottom: 20px;
 }
+
+.review-body .col {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.review-body img {
+  max-width: 100%;
+  min-width: 80px;
+  margin-left: 30px;
+  border-radius: 10%;
+}
+
+.thanks-dialog p {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.thanks-dialog button {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin: 10px 0;
+}
