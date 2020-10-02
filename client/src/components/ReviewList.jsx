@@ -111,7 +111,7 @@ class ReviewList extends React.Component {
         </Nav.Item>
       </Nav>
 
-      <Dropdown onSelect={this.sortBy}>
+      <Dropdown className="sort-by" onSelect={this.sortBy}>
         <Dropdown.Toggle id="dropdown-sort-by">
           Sort by: {this.state.sort === 'rec' ? 'Recommended' : 'Newest'}
         </Dropdown.Toggle>
