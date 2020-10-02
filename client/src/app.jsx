@@ -68,7 +68,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <ReviewList
           itemId={this.state.id}
           clickReviewPhoto={this.clickReviewPhoto}/>

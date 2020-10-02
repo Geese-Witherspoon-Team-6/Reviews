@@ -1,3 +1,8 @@
+.main {
+  margin: 0 24px;
+  font-family: "Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;;
+}
+
 .carousel-img {
   margin: 1%;
 }
@@ -12,4 +17,37 @@
   left: 20px;
   top: -60px;
   position: relative;
+}
+
+.review {
+  padding: 9px 9px 9px 0;
+  margin-bottom: 24px;
+  font-weight: 300;
+  font-size: 17px;
+}
+
+.user-icon {
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.item-icon {
+  border-radius: 10%;
+  margin-right: 12px;
+}
+
+.quiet-text {
+  font-size: 14px;
+  line-height: 18px;
+  color: #595959 ;
+  margin: 10px 0;
+}
+
+.link {
+  text-decoration: underline;
+  margin-right: 10px;
+}
+
+.space {
+  margin-bottom: 20px;
 }
