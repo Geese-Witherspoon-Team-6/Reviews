@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
+import ReviewHeader from './ReviewHeader.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -112,7 +113,8 @@ class ReviewList extends React.Component {
     let end = start + 5;
     return (
     <div>
-    <h2 id="reviews-count">{this.state.shopReviews.length} Reviews</h2>
+    {/* <h2 id="reviews-count">{this.state.shopReviews.length} Reviews </h2> */}
+    <ReviewHeader reviews={this.state.shopReviews} />
     <TabContainer activeKey={this.state.currentTab} transition={false}>
 
       <Nav id="review-nav" onSelect={this.onSwitchTabs}>
