@@ -97,3 +97,30 @@
   box-shadow: none;
   outline: none;
 }
+
+#review-nav {
+  border-bottom: 2px solid rgba(34, 34, 34, 0.15);
+}
+
+#review-nav button {
+  border: none;
+  background-color: white;
+}
+
+#review-nav #items-tab {
+  border-bottom: 2px solid black;
+  margin-bottom: -2px;
+}
+
+#reviews #review-nav a, a:hover {
+  color: black;
+  font-weight: 300;
+}
+
+#reviews h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 42px;
+  margin: 12px 0 0 0;
+}
