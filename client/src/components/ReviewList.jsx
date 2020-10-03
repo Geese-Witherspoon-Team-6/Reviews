@@ -66,7 +66,6 @@ class ReviewList extends React.Component {
   }
 
   onSwitchTabs(key) {
-    console.log(key)
     document.getElementById(`${key}-tab`).style.borderBottom = '2px solid black';
     document.getElementById(`${key}-tab`).style.marginBottom = '-2px';
 
@@ -85,8 +84,6 @@ class ReviewList extends React.Component {
   sortBy(sort, e) {
     this.getItemReviews(sort);
     this.getShopReviews(sort);
-    console.log('currentTab: ', this.state.currentTab);
-    // this.onSwitchTabs(this.state.currentTab);
     this.setState({ sort })
   }
 

@@ -143,3 +143,9 @@
 #reviews .active .page-link  {
   background-color: #b9b9b9;
 }
+
+#reviews .star-icon {
+  height: 18px;
+  width: 18px;
+  display: inline-block
+}
