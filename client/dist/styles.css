@@ -98,6 +98,11 @@
   outline: none;
 }
 
+#reviews .dropdown-item:active {
+  background-color: whitesmoke;
+  color: black;
+}
+
 #review-nav {
   border-bottom: 2px solid rgba(34, 34, 34, 0.15);
 }
@@ -112,7 +117,7 @@
   margin-bottom: -2px;
 }
 
-#reviews #review-nav a, a:hover {
+#reviews #review-nav a, #reviews #review-nav a:hover {
   color: black;
   font-weight: 300;
 }
@@ -123,4 +128,18 @@
   font-size: 26px;
   line-height: 42px;
   margin: 12px 0 0 0;
+}
+
+#reviews .page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .5rem;
+  line-height: 1.25;
+  color: black;
+  background-color: whitesmoke;
+  border: none;
+}
+
+#reviews .active .page-link  {
+  background-color: #b9b9b9;
 }

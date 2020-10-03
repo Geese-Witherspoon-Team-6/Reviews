@@ -66,6 +66,7 @@ class ReviewList extends React.Component {
   }
 
   onSwitchTabs(key) {
+    console.log(key)
     document.getElementById(`${key}-tab`).style.borderBottom = '2px solid black';
     document.getElementById(`${key}-tab`).style.marginBottom = '-2px';
 
@@ -84,7 +85,8 @@ class ReviewList extends React.Component {
   sortBy(sort, e) {
     this.getItemReviews(sort);
     this.getShopReviews(sort);
-    this.onSwitchTabs(this.state.currentTab);
+    console.log('currentTab: ', this.state.currentTab);
+    // this.onSwitchTabs(this.state.currentTab);
     this.setState({ sort })
   }
 
@@ -114,9 +116,9 @@ class ReviewList extends React.Component {
     return (
     <div>
     <h2 id="reviews-count">{this.state.shopReviews.length} Reviews</h2>
-    <TabContainer activeKey={this.state.currentTab} transition={false} onSelect={this.onSwitchTabs}>
+    <TabContainer activeKey={this.state.currentTab} transition={false}>
 
-      <Nav id="review-nav">
+      <Nav id="review-nav" onSelect={this.onSwitchTabs}>
         <Nav.Item id="items-tab" as="button">
           <Nav.Link eventKey="items">Reviews for this item {this.state.itemReviews.length}</Nav.Link>
         </Nav.Item>
