@@ -21,7 +21,7 @@ class App extends React.Component {
     };
 
     this.getPhotoReviews = this.getPhotoReviews.bind(this)
-    this.handleReviewClick = this.handleReviewClick.bind(this)
+    this.clickReviewPhoto = this.clickReviewPhoto.bind(this)
     this.modalHandleSelect = this.modalHandleSelect.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
     this.carouselClick = this.carouselClick.bind(this)
@@ -44,7 +44,7 @@ class App extends React.Component {
       })
   }
 
-  handleReviewClick(e) {
+  clickReviewPhoto(e) {
     var reviews = this.state.photoReviews.flat();
     var modalIdx = reviews.indexOf(reviews.find((review) => review._id === e.target.id));
     this.setState({ modalIdx, modalIsCarousel: false, modalShow: true })
@@ -71,7 +71,7 @@ class App extends React.Component {
       <div>
         <ReviewList
           itemId={this.state.id}
-          handleReviewClick={this.handleReviewClick}/>
+          clickReviewPhoto={this.clickReviewPhoto}/>
         <PhotoCarousel
           photos={this.state.photoReviews}
           carouselClick={this.carouselClick} />

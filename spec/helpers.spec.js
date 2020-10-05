@@ -8,21 +8,24 @@ var testReviews = [{
   userId: 'BigBird',
   itemId: 1,
   storeId: 0,
-  createdAt: faker.date.past()
+  createdAt: faker.date.past(),
+  helpful: 0
 },
 {
   userId: 'noodleManxD',
   itemId: 1,
   storeId: 0,
   createdAt: faker.date.past(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 3
 },
 {
   userId: 'elmo',
   itemId: 2,
   storeId: 0,
   createdAt: faker.date.future(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 1
 }]
 
 beforeAll(async () => {
@@ -56,14 +59,20 @@ describe('Database helper functions', () => {
 
   describe('getItem', () => {
     it('should get back an array of reviews', () => {
-      return helper.getItem(1).then((reviews) => {
+      return helper.getItem(1, 'new').then((reviews) => {
         expect(reviews.length).not.toBe(0);
       })
     });
 
-    it('should get reviews in reverse-chronological order', () => {
-      return helper.getItem(1).then((reviews) => {
+    it('should get reviews in reverse-chronological order if sort argument is "new"', () => {
+      return helper.getItem(1, 'new').then((reviews) => {
         expect(reviews[0].createdAt > reviews[1].createdAt).toBe(true);
+      })
+    });
+
+    it('should get reviews in order of how "helpfu" if sort argument is "rec"', () => {
+      return helper.getItem(1, 'rec').then((reviews) => {
+        expect(reviews[0].helpful > reviews[1].helpful).toBe(true);
       })
     });
 
@@ -77,16 +86,21 @@ describe('Database helper functions', () => {
 
   describe('getStore', () => {
     it('should get back an array of all reviews for a store', () => {
-      return helper.getStore(0).then((reviews) => {
+      return helper.getStore(0, 'new').then((reviews) => {
         expect(reviews.length).toBe(3);
         expect(Array.isArray(reviews)).toBe(true);
       })
     });
 
-    it('should get reviews in reverse-chronological order', () => {
-      return helper.getStore(0).then((reviews) => {
-        var chrono = reviews.slice().sort((a, b) => b.createdAt - a.createdAt);
-        expect(reviews).toEqual(chrono);
+    it('should get reviews in reverse-chronological order if sort argument is "new"', () => {
+      return helper.getStore(0, 'new').then((reviews) => {
+        expect(reviews[0].createdAt > reviews[1].createdAt).toBe(true);
+      })
+    });
+
+    it('should get reviews in order of how "helpfu" if sort argument is "rec"', () => {
+      return helper.getStore(0, 'rec').then((reviews) => {
+        expect(reviews[0].helpful > reviews[1].helpful).toBe(true);
       })
     });
   });
@@ -105,6 +119,17 @@ describe('Database helper functions', () => {
         expect(reviews[0].itemId).not.toBe(reviews[1].itemId);
       })
     });
+  });
+
+  describe('patchHelpful', () => {
+    it('should increment a review\'s helpful field', async () => {
+      var review = await Review.findOne({ userId: 'BigBird' });
+      var before = await Review.findById(review._id);
+      await helper.patchHelpful(review._id);
+      var after = await Review.findById(review._id);
+
+      expect(after.helpful).toBe(before.helpful + 1);
+    })
   });
 
 });

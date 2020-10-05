@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 const Review = require('./Review.js');
 mongoose.Promise = global.Promise;
 
-const getItem = function(itemId) {
-  return Review.find({ itemId }).sort({ createdAt: -1 });
+const getItem = function(itemId, sort) {
+  if (sort === 'new') {
+    return Review.find({ itemId }).sort({ createdAt: -1 });
+  } else {
+    return Review.find({ itemId }).sort({ helpful: -1, createdAt: -1 })
+  }
 };
 
 const getStoreId = function(itemId) {
@@ -13,8 +17,12 @@ const getStoreId = function(itemId) {
     })
 }
 
-const getStore = function(storeId) {
-  return Review.find({ storeId }).sort({ createdAt: -1 });
+const getStore = function(storeId, sort) {
+  if (sort === 'new') {
+    return Review.find({ storeId }).sort({ createdAt: -1 });
+  } else {
+    return Review.find({ storeId }).sort({ helpful: -1, createdAt: -1 })
+  }
 }
 
 const getPhoto = function(itemId, storeId) {
@@ -27,9 +35,17 @@ const getPhoto = function(itemId, storeId) {
     });
 }
 
+const patchHelpful = function(reviewId) {
+  return Review.findById(reviewId, 'helpful')
+    .then((review) => {
+      return Review.findByIdAndUpdate(review._id, { helpful: (review.helpful + 1) }, { new: true });
+    });
+}
+
 module.exports = {
   getItem,
   getStore,
   getPhoto,
-  getStoreId
+  getStoreId,
+  patchHelpful
 }

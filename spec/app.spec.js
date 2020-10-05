@@ -18,21 +18,24 @@ var testReviews = [{
   userId: 'BigBird',
   itemId: 1,
   storeId: 0,
-  createdAt: faker.date.past()
+  createdAt: faker.date.past(),
+  helpful: 0
 },
 {
   userId: 'noodleManxD',
   itemId: 1,
   storeId: 0,
   createdAt: faker.date.past(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 3
 },
 {
   userId: 'elmo',
   itemId: 2,
   storeId: 0,
   createdAt: faker.date.future(),
-  imageUrl: faker.image.imageUrl()
+  imageUrl: faker.image.imageUrl(),
+  helpful: 1
 }]
 
 beforeAll(async () => {
@@ -58,14 +61,14 @@ describe('API endpoints', () => {
   describe('Item reviews endpoint', () => {
 
     it('should respond to a request for item reviews', async () => {
-      const res = await request.get('/api/item-reviews/1');
+      const res = await request.get('/api/item-reviews/1/new');
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
     });
 
     it('should use the getItem database helper to get reviews', async () => {
-      const res = await request.get('/api/item-reviews/1');
-      const reviews = await helper.getItem(1);
+      const res = await request.get('/api/item-reviews/1/new');
+      const reviews = await helper.getItem(1, 'new');
 
       expect(res.body.length).toBe(reviews.length);
       res.body.forEach((review, idx) => {
@@ -79,14 +82,14 @@ describe('API endpoints', () => {
   describe('Store reviews endpoint', () => {
 
     it('should respond to a request for store reviews', async () => {
-      const res = await request.get('/api/store-reviews/1');
+      const res = await request.get('/api/store-reviews/1/new');
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
     });
 
     it('should use the getItem database helper to get reviews', async () => {
-      const res = await request.get('/api/store-reviews/1');
-      const reviews = await helper.getStore(0);
+      const res = await request.get('/api/store-reviews/1/new');
+      const reviews = await helper.getStore(0, 'new');
 
       expect(res.body.length).toBe(reviews.length);
       res.body.forEach((review, idx) => {
@@ -118,4 +121,25 @@ describe('API endpoints', () => {
     });
   });
 
+  describe('Helpful patch endpoint', () => {
+
+    it('should respond to a request to increment a review\'s helpful field', async () => {
+      const review = await Review.findOne({ userId: 'BigBird' });
+      const res = await request.patch(`/api/helpful-review/${review._id}`);
+      expect(res.status).toBe(200);
+    });
+
+    it('should use the patchHelpful database helper to update a review', async () => {
+      const review = await Review.findOne({ userId: 'BigBird' });
+      const updated = await helper.patchHelpful(review._id);
+      const res = await request.patch(`/api/helpful-review/${review._id}`);
+      updated.helpful = updated.helpful + 1;
+
+      expect(res.body.userId).toBe(updated.userId);
+      expect(res.body.itemId).toBe(updated.itemId);
+      expect(res.body.storeId).toBe(updated.storeId);
+      expect(res.body.helpful).toBe(updated.helpful);
+    });
+
+  })
 })
