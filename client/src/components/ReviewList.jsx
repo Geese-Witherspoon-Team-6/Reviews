@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
 import ReviewHeader from './ReviewHeader.jsx';
-import { PageStyle, NavStyled } from '../styled-components.jsx';
+import { NavStyled, DropToggleStyled } from '../styled-components.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -127,10 +127,10 @@ class ReviewList extends React.Component {
 
       <Container fluid>
         <Row className="justify-content-end">
-          <Dropdown className="sort-by" onSelect={this.sortBy}>
-            <Dropdown.Toggle id="dropdown-sort-by">
+          <Dropdown onSelect={this.sortBy}>
+            <DropToggleStyled>
               Sort by: {this.state.sort === 'rec' ? 'Recommended' : 'Newest'}
-            </Dropdown.Toggle>
+            </DropToggleStyled>
             <Dropdown.Menu>
               <Dropdown.Item eventKey="rec">Recommended</Dropdown.Item>
               <Dropdown.Item eventKey="new">Newest</Dropdown.Item>

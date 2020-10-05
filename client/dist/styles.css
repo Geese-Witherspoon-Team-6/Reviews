@@ -70,32 +70,11 @@
   line-height: 18px;
 }
 
-.thanks-dialog button, .sort-by button {
+.thanks-dialog button {
   font-weight: 600;
   font-size: 13px;
   line-height: 18px;
   border-radius: 20px;
-}
-
-#dropdown-sort-by {
-  float: right;
-  background-color: white;
-  color: black;
-  border-color: transparent;
-  padding: 10px 15px
-}
-
-#dropdown-sort-by:hover {
-  background-color: rgb(240, 240, 240);
-  color: black;
-  border-color: transparent;
-  padding: 10px 15px
-}
-
-#dropdown-sort-by:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
 }
 
 #reviews .dropdown-item:active {
