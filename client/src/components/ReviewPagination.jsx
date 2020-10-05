@@ -1,38 +1,38 @@
 import React from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+import { PaginationStyled } from '../styled-components.jsx';
 
 const ReviewPagination = ({ page, max, onPaginate }) => {
-  return (<Pagination>
-    <Pagination.Prev
+  return (<PaginationStyled>
+    <PaginationStyled.Prev
       onClick={() => onPaginate('prev')}
       disabled={page === 1} />
 
     <div className="d-inline-flex" onClick={onPaginate}>
-    <Pagination.Item active={page === 1} >{1} </Pagination.Item>
+    <PaginationStyled.Item active={page === 1} >{1} </PaginationStyled.Item>
 
     {(max < 5 || page <= 2) && max >= 2 &&
-      <Pagination.Item active={page === 2} >{2} </Pagination.Item>}
+      <PaginationStyled.Item active={page === 2} >{2} </PaginationStyled.Item>}
     {max < 5 && max >= 3 &&
-      <Pagination.Item active={page === 3}>{3}</Pagination.Item>}
+      <PaginationStyled.Item active={page === 3}>{3}</PaginationStyled.Item>}
     {max < 5 && max >= 4 &&
-      <Pagination.Item active={page === 4}>{4}</Pagination.Item>}
+      <PaginationStyled.Item active={page === 4}>{4}</PaginationStyled.Item>}
     {max > 4 &&
-      <Pagination.Ellipsis disabled />}
+      <PaginationStyled.Ellipsis disabled />}
     {page > 2 && page < (max - 1) && max > 4 &&
-      <Pagination.Item active={page > 2 && page < (max - 1)}>{page}</Pagination.Item>}
+      <PaginationStyled.Item active={page > 2 && page < (max - 1)}>{page}</PaginationStyled.Item>}
     {page > 2 && page < (max - 1) && max > 4 &&
-      <Pagination.Ellipsis disabled />}
+      <PaginationStyled.Ellipsis disabled />}
     {page >= (max - 1) && max > 4 &&
-      <Pagination.Item active={page === (max - 1)}>{max - 1}</Pagination.Item>}
+      <PaginationStyled.Item active={page === (max - 1)}>{max - 1}</PaginationStyled.Item>}
 
     {max > 4 &&
-      <Pagination.Item active={page === max} >{max} </Pagination.Item>}
+      <PaginationStyled.Item active={page === max} >{max} </PaginationStyled.Item>}
     </div>
 
-    <Pagination.Next
+    <PaginationStyled.Next
       onClick={() => onPaginate('next')}
       disabled={page === max} />
-  </Pagination>)
+  </PaginationStyled>)
 }
 
 export default ReviewPagination;

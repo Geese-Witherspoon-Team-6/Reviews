@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 
-import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
 import TabContainer from 'react-bootstrap/TabContainer';
 import TabContent from 'react-bootstrap/TabContent';
@@ -13,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
 import ReviewHeader from './ReviewHeader.jsx';
-import { PageStyle } from '../styled-components.jsx';
+import { PageStyle, NavStyled } from '../styled-components.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -114,18 +113,17 @@ class ReviewList extends React.Component {
     let end = start + 5;
     return (
     <div>
-    {/* <h2 id="reviews-count">{this.state.shopReviews.length} Reviews </h2> */}
     <ReviewHeader reviews={this.state.shopReviews} />
     <TabContainer activeKey={this.state.currentTab} transition={false}>
 
-      <Nav id="review-nav" onSelect={this.onSwitchTabs}>
-        <Nav.Item id="items-tab" as="button">
-          <Nav.Link eventKey="items">Reviews for this item {this.state.itemReviews.length}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item id="shop-tab" as="button">
-          <Nav.Link eventKey="shop">Reviews for this shop {this.state.shopReviews.length}</Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <NavStyled onSelect={this.onSwitchTabs}>
+        <NavStyled.Item id="items-tab" as="button">
+          <NavStyled.Link eventKey="items">Reviews for this item {this.state.itemReviews.length}</NavStyled.Link>
+        </NavStyled.Item>
+        <NavStyled.Item id="shop-tab" as="button">
+          <NavStyled.Link eventKey="shop">Reviews for this shop {this.state.shopReviews.length}</NavStyled.Link>
+        </NavStyled.Item>
+      </NavStyled>
 
       <Container fluid>
         <Row className="justify-content-end">
@@ -159,13 +157,11 @@ class ReviewList extends React.Component {
             </TabPane>
           </TabContent>
 
-          <PageStyle>
           <ReviewPagination
             page={this.state.pageNum}
             max={this.state.maxPage}
             onPaginate={this.onPaginate}
           />
-          </PageStyle>
         </Row>
       </Container>
     </TabContainer>

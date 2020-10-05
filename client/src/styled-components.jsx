@@ -1,3 +1,6 @@
+import React from 'react';
+import Pagination from 'react-bootstrap/Pagination';
+import Nav from 'react-bootstrap/Nav';
 import styled from 'styled-components';
 
 export const Star = styled.span`
@@ -12,7 +15,7 @@ export const Header = styled.h2`
   line-height: 42px;
   margin: 12px 0 0 0;`
 
-export const PageStyle = styled.ul`
+export const PaginationStyled = styled(Pagination)`
   .page-link {
     position: relative;
     display: block;
@@ -26,3 +29,22 @@ export const PageStyle = styled.ul`
   .active .page-link  {
     background-color: #b9b9b9;
   }`
+
+  export const NavStyled  = styled(Nav)`
+    border-bottom: 2px solid rgba(34, 34, 34, 0.15);
+
+    button {
+      border: none;
+      background-color: white;
+    }
+
+    a, a:hover {
+      color: black;
+      font-weight: 300;
+    }
+
+    #items-tab {
+      border-bottom: 2px solid black;
+      margin-bottom: -2px;
+    }
+  `
