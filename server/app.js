@@ -6,6 +6,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/listing/:itemId', express.static(path.join(__dirname, '../client/dist')))
+app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/api/item-reviews/:itemId/:sort', (req, res) => {
   reviews.getItem(req.params.itemId, req.params.sort)
