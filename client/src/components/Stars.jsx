@@ -1,4 +1,5 @@
 import React from 'react';
+import { Star } from '../styled-components.jsx';
 
 const Stars = ({ rating, isHalf }) => {
   let stars = [];
@@ -28,13 +29,13 @@ const Stars = ({ rating, isHalf }) => {
     </svg>;
 
   for (var i = 0; i < Math.floor(rating); i++) {
-    stars.push(<span key={Math.random()} className="star-icon">{full}</span>);
+    stars.push(<Star key={Math.random()} >{full}</Star>)
   }
   if (isHalf) {
-    stars.push(<span key={Math.random()} className="star-icon">{half}</span>);
+    stars.push(<Star key={Math.random()} >{half}</Star>)
   }
   for (var i = 0; i < (5 - Math.ceil(rating)); i++) {
-    stars.push(<span key={Math.random()} className="star-icon">{empty}</span>)
+    stars.push(<Star key={Math.random()} >{empty}</Star>)
   }
 
   return stars;
