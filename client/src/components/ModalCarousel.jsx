@@ -1,10 +1,11 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
+// import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import ModalHeader from 'react-bootstrap/ModalHeader';
+import { ModalStyled } from '../styled-components.jsx';
 
 const ModalCarousel = ({ reviewIdx, reviews, show, isCarousel, toggleShow, handleSelect }) => (
-  <Modal show={show} onHide={toggleShow} centered>
+  <ModalStyled show={show} onHide={toggleShow} centered>
     <ModalHeader closeButton></ModalHeader>
     <Carousel
       activeIndex={reviewIdx}
@@ -22,7 +23,7 @@ const ModalCarousel = ({ reviewIdx, reviews, show, isCarousel, toggleShow, handl
           </div>
         </Carousel.Item>)}
     </Carousel>
-  </Modal>
+  </ModalStyled>
 )
 
 export default ModalCarousel;

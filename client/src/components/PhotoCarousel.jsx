@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { CarouselImageStyled } from '../styled-components.jsx';
 
 const PhotoCarousel = ({ photos, carouselClick }) => {
   const [index, setIndex] = useState(0);
@@ -13,9 +14,9 @@ const PhotoCarousel = ({ photos, carouselClick }) => {
       {photos.map((slide, slideIdx) => {
         return <Carousel.Item key={slideIdx}>
           {slide.map((photo, photoIdx) => (
-            <div className="carousel-img d-inline" key={photoIdx} onClick={carouselClick}>
+            <CarouselImageStyled key={photoIdx} onClick={carouselClick}>
               <img src={photo.imageUrl} id={slideIdx * 4 + photoIdx} key={photoIdx}></img>
-            </div>
+            </CarouselImageStyled>
           ))}
         </Carousel.Item>
       })}

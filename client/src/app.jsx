@@ -5,6 +5,7 @@ import $ from 'jquery';
 import ReviewList from './components/ReviewList.jsx';
 import PhotoCarousel from './components/PhotoCarousel.jsx';
 import ModalCarousel from './components/ModalCarousel.jsx';
+import { Main } from './styled-components.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="main">
+      <Main>
         <ReviewList
           itemId={this.state.id}
           clickReviewPhoto={this.clickReviewPhoto}/>
@@ -82,7 +83,7 @@ class App extends React.Component {
           isCarousel={this.state.modalIsCarousel}
           toggleShow={this.toggleModalShow}
           handleSelect={this.modalHandleSelect} />
-      </div>
+      </Main>
     )
   }
 }

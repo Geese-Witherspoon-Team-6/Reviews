@@ -2,7 +2,8 @@ import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Media from 'react-bootstrap/Media'
+import Media from 'react-bootstrap/Media';
+import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 
 export const Star = styled.span`
@@ -146,4 +147,28 @@ export const ReviewStyled = styled(Media)`
     border-radius: 10%;
     margin-right: 12px;
   }
+`
+
+export const ModalStyled = styled(Modal)`
+  .exit-btn {
+    float: right;
+    left: 20px;
+    top: -60px;
+    position: relative;
+  }
+`
+
+export const CarouselImageStyled = styled.div`
+  margin: 1%;
+  display: inline;
+
+  img {
+    width: 23%;
+    border-radius: 5%;
+  }
+`
+
+export const Main = styled.div`
+  margin: 0 24px;
+  font-family: "Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
 `
