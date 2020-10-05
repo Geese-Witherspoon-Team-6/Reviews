@@ -1,6 +1,7 @@
 const faker = require('faker');
 const Review = require('./Review.js');
 const db = require('./index.js');
+const birds = require('./birds.js');
 
 const mockData = [];
 
@@ -8,13 +9,13 @@ const mockData = [];
 for (var i = 1; i <= 100; i++) {
   for (var j = 0; j < 5; j++) {
     var itemName = `${faker.commerce.productName()} - ${faker.commerce.productAdjective()}, ${faker.commerce.department()}`;
-    // all product thumbnails will be the same, regardless of different itemIds; fix for SDC
-    var itemThumb = faker.image.imageUrl();
+    var itemThumb = birds[i % birds.length];
     var imageUrl = null;
 
     var hasPhoto = Boolean(Math.round(Math.random()));
     if (hasPhoto) {
-      imageUrl = faker.image.imageUrl();
+      // SDC Fix - all seed data has the same photo review image
+      imageUrl = 'https://i.imgur.com/bf6OaZl.jpg';
     }
 
     var newReview = {
@@ -29,7 +30,7 @@ for (var i = 1; i <= 100; i++) {
       itemThumb: itemThumb,
       storeId: 1,
       imageUrl: imageUrl,
-      helpful: 0
+      helpful: Math.floor(Math.random() * 20)
     }
 
     mockData.push(newReview);
@@ -39,7 +40,10 @@ for (var i = 1; i <= 100; i++) {
 // Editing data for demo
 for (var i = 0; i < 5; i++) {
   mockData[i].itemName = 'The Risk I Took Card - Bird - Greeting - Math - Humor - Mincing Mockingbird';
-  mockData[i].itemThumb = 'https://i.etsystatic.com/5135077/d/il/1273fe/373402287/il_75x75.373402287_ckmq.jpg?version=0';
+  mockData[i].itemThumb = 'https://i.imgur.com/V46YJKJ.jpg';
+  if (mockData[i].imageUrl) {
+    mockData[i].imageUrl = i % 2 ? 'https://i.imgur.com/dxcQPYQ.jpg' : 'https://i.imgur.com/21Qq1X9.jpg';
+  }
 }
 
 // Inserting seed data
