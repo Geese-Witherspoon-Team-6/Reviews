@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
 import Stars from './Stars.jsx';
+import { Helpful } from '../styled-components.jsx';
 
 const Review = ({ review, clickReviewPhoto, clickHelpful }) => (
   <Media className="review space">
@@ -48,7 +49,7 @@ const Review = ({ review, clickReviewPhoto, clickHelpful }) => (
           <div className="link quiet-text">{review.itemName}</div>
         </Media.Body>
       </Media>
-      <div className="thanks-dialog">
+      <Helpful >
         <Button
           variant="light"
           onClick={clickHelpful}
@@ -56,7 +57,7 @@ const Review = ({ review, clickReviewPhoto, clickHelpful }) => (
           Is this review helpful?
         </Button>
         <p id={`${review._id}-thanks`} style={{display: 'none'}}>Thanks for your feedback!</p>
-      </div>
+      </Helpful>
     </Media.Body>
   </Media>
 )

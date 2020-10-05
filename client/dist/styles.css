@@ -63,21 +63,3 @@
   margin-left: 30px;
   border-radius: 10%;
 }
-
-.thanks-dialog p {
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-.thanks-dialog button {
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 18px;
-  border-radius: 20px;
-}
-
-/* #reviews .dropdown-item:active {
-  background-color: whitesmoke;
-  color: black;
-} */

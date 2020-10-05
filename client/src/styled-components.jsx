@@ -86,3 +86,18 @@ export const DropItemStyled = styled(Dropdown.Item)`
     color: black;
   }
 `
+
+export const Helpful = styled.div`
+p {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+button {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  border-radius: 20px;
+}
+`
