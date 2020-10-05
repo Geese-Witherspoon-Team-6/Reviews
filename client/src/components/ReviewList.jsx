@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
 import ReviewHeader from './ReviewHeader.jsx';
+import { PageStyle } from '../styled-components.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -158,11 +159,13 @@ class ReviewList extends React.Component {
             </TabPane>
           </TabContent>
 
+          <PageStyle>
           <ReviewPagination
             page={this.state.pageNum}
             max={this.state.maxPage}
             onPaginate={this.onPaginate}
           />
+          </PageStyle>
         </Row>
       </Container>
     </TabContainer>
