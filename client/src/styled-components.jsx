@@ -50,32 +50,39 @@ export const NavStyled  = styled(Nav)`
   }`
 
 export const DropToggleStyled = styled(Dropdown.Toggle)`
-{
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 18px;
-  border-radius: 20px;
-  float: right;
-  background-color: white;
-  color: black;
-  border-color: transparent;
-  padding: 10px 15px;
-}
+  {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    border-radius: 20px;
+    float: right;
+    background-color: white;
+    color: black;
+    border-color: transparent;
+    padding: 10px 15px;
+  }
 
-&:hover {
-  float: right;
-  background-color: whitesmoke;
-  color: black;
-  border-color: transparent;
-  padding: 10px 15px;
-}
+  &:hover {
+    float: right;
+    background-color: whitesmoke;
+    color: black;
+    border-color: transparent;
+    padding: 10px 15px;
+  }
 
-#reviews &:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
-  background-color: inherit;
-  color: inherit;
-  border-color: transparent;
-}
+  #reviews &:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    background-color: inherit;
+    color: inherit;
+    border-color: transparent;
+  }
+`
+
+export const DropItemStyled = styled(Dropdown.Item)`
+  &:active {
+    background-color: whitesmoke;
+    color: black;
+  }
 `

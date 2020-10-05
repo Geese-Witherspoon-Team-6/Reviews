@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Review from './Review.jsx';
 import ReviewPagination from './ReviewPagination.jsx';
 import ReviewHeader from './ReviewHeader.jsx';
-import { NavStyled, DropToggleStyled } from '../styled-components.jsx';
+import { NavStyled, DropToggleStyled, DropItemStyled } from '../styled-components.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -132,8 +132,8 @@ class ReviewList extends React.Component {
               Sort by: {this.state.sort === 'rec' ? 'Recommended' : 'Newest'}
             </DropToggleStyled>
             <Dropdown.Menu>
-              <Dropdown.Item eventKey="rec">Recommended</Dropdown.Item>
-              <Dropdown.Item eventKey="new">Newest</Dropdown.Item>
+              <DropItemStyled eventKey="rec">Recommended</DropItemStyled>
+              <DropItemStyled eventKey="new">Newest</DropItemStyled>
             </Dropdown.Menu>
           </Dropdown>
         </Row>
