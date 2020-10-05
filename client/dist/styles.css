@@ -122,14 +122,6 @@
   font-weight: 300;
 }
 
-#reviews h2 {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-weight: 300;
-  font-size: 26px;
-  line-height: 42px;
-  margin: 12px 0 0 0;
-}
-
 #reviews .page-link {
   position: relative;
   display: block;
@@ -142,10 +134,4 @@
 
 #reviews .active .page-link  {
   background-color: #b9b9b9;
-}
-
-#reviews .star-icon {
-  height: 18px;
-  width: 18px;
-  display: inline-block
 }

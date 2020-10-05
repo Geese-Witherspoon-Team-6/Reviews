@@ -1,5 +1,6 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import { Header } from '../styled-components.jsx';
 
 const ReviewHeader = ({ reviews }) => {
   let ratings = reviews.map((review) => review.rating);
@@ -10,9 +11,9 @@ const ReviewHeader = ({ reviews }) => {
   }
 
   return (
-  <h2 id="reviews-count">
+  <Header>
     {reviews.length} Reviews <Stars rating={mean} isHalf={mean % 1} />
-  </h2>)
+  </Header>)
 }
 
 export default ReviewHeader;
