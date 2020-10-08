@@ -150,6 +150,44 @@ export const ReviewStyled = styled(Media)`
 `
 
 export const ModalStyled = styled(Modal)`
+  .modal-dialog {
+    max-width: 70%;
+  }
+
+  .col, .col-2 {
+    padding: 0;
+  }
+
+  .review-img {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .review-text {
+    margin-top: 3%;
+    font-size: 14px;
+    line-height: 18px;
+    color: #595959;
+  }
+
+  .review-text .username {
+    font-weight: 600;
+    text-decoration: underline;
+    color: black;
+  }
+
+  .body {
+    padding: 3%;
+    font-family: "Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+  }
+
+  .user-icon {
+    border-radius: 50%;
+    margin-left: 1em;
+  }
+
   .exit-btn {
     float: right;
     left: 20px;
