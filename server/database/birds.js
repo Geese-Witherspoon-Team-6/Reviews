@@ -28,4 +28,24 @@ const birds = [
   'https://qtsy-cropped.s3-us-west-2.amazonaws.com/whom-web_large.jpg'
 ];
 
-module.exports = birds;
+const reviewImages = [
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/1.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/2.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/3.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/4.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/5.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/6.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/7.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/8.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/9.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/10.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/11.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/12.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/13.jpg',
+  'https://qtsy-reviews.s3.us-east-2.amazonaws.com/14.jpg'
+]
+
+module.exports = {
+  birds,
+  reviewImages
+}
