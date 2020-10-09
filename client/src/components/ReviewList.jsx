@@ -37,7 +37,7 @@ class ReviewList extends React.Component {
   }
 
   getItemReviews(sort) {
-    $.get(`http://localhost:3001/api/item-reviews/${this.state.id}/${sort}`)
+    $.get(`http://${location.hostname}:3001/api/item-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ itemReviews: reviews })
       })
@@ -47,7 +47,7 @@ class ReviewList extends React.Component {
   }
 
   getShopReviews(sort) {
-    $.get(`http://localhost:3001/api/store-reviews/${this.state.id}/${sort}`)
+    $.get(`http://${location.hostname}:3001/api/store-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ shopReviews: reviews })
       })
