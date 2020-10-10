@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   getPhotoReviews() {
-    $.get(`http://${location.hostname}:3001/api/photo-reviews/${this.state.id}`)
+    $.get(`http://ec2-18-221-237-249.us-east-2.compute.amazonaws.com:3001/api/photo-reviews/${this.state.id}`)
       .done((reviews) => {
         // formatting for photo carousel
         var slides = [[], [], [], [], []];

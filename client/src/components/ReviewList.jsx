@@ -37,7 +37,7 @@ class ReviewList extends React.Component {
   }
 
   getItemReviews(sort) {
-    $.get(`http://${location.hostname}:3001/api/item-reviews/${this.state.id}/${sort}`)
+    $.get(`http://ec2-18-221-237-249.us-east-2.compute.amazonaws.com:3001/api/item-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ itemReviews: reviews })
       })
@@ -47,7 +47,7 @@ class ReviewList extends React.Component {
   }
 
   getShopReviews(sort) {
-    $.get(`http://${location.hostname}:3001/api/store-reviews/${this.state.id}/${sort}`)
+    $.get(`http://ec2-18-221-237-249.us-east-2.compute.amazonaws.com:3001/api/store-reviews/${this.state.id}/${sort}`)
       .done((reviews) => {
         this.setState({ shopReviews: reviews })
       })
